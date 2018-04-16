@@ -1,0 +1,10 @@
+{% if latest_contract_list %}
+    <ul>
+        {% for contract in latest_contract_list %}
+            <li><a href="/USTPricing/{{ contract.evepraisalID }}/results/">{{ contract.evepraisalURL }}</a>
+        {% endfor %}
+    </ul>
+
+{% else %}
+    <p>No contracts are available.</p>
+{% endif %}
