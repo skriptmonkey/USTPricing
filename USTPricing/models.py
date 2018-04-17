@@ -17,10 +17,15 @@ class USTContract(models.Model):
         self.evepraisalID = data["id"]
         self.totalSize = data["totals"]["volume"]
         self.collateral= data["totals"]["buy"]
+
         if self.collateral > 100000000:
             self.reward = (self.totalSize * 750) + (self.collateral * 0.05)
         else:
             self.reward = (self.totalSize * 750)
+
+        if self.totalSize <= 100 and self.collateral < 100000000:
+            self.reward = 0
+
         
     def __str__(self):
         return self.evepraisalURL
