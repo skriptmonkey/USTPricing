@@ -22,6 +22,9 @@ class USTContract(models.Model):
         else:
             self.reward = (self.totalSize * 750)
 
+        if self.reward < 10000000:
+            self.reward = 10000000
+
         if self.totalSize <= 100 and self.collateral < 100000000:
             self.reward = 0
 
