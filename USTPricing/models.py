@@ -5,7 +5,6 @@ import urllib.request
 
 class USTContract(models.Model):
     evepraisalURL = models.URLField()
-    pub_date = models.DateTimeField("Date Published")
     totalSize = models.FloatField(default=0)
     collateral = models.FloatField(default=0)
     reward = models.FloatField(default=0)

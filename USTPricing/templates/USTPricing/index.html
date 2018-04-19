@@ -1,10 +1,11 @@
-{% if latest_contract_list %}
-    <ul>
-        {% for contract in latest_contract_list %}
-            <li><a href="/USTPricing/{{ contract.evepraisalID }}/results/">{{ contract.evepraisalURL }}</a>
-        {% endfor %}
-    </ul>
-
-{% else %}
-    <p>No contracts are available.</p>
-{% endif %}
+<html>
+</html>
+<body>
+    <div id="form" align="center">
+        <p>Enter Evepraisal URL.</p>
+        <form action="/USTPricing/results/" method="post">
+            {% csrf_token %}
+            <input type="text" name="evepraisalURL" />
+            <input type="submit" value="Submit" />
+        </form>
+</body>
