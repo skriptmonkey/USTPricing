@@ -12,7 +12,9 @@ class USTContract(models.Model):
 
     def getData(self):
         url = self.evepraisalURL + ".json"
-        data = json.load(urllib.request.urlopen(url))
+        response = urllib.request.urlopen(url)
+        str_response = response.read().decode('utf-8')
+        data = json.loads(str_response)
         self.evepraisalID = data["id"]
         self.totalSize = data["totals"]["volume"]
         self.collateral= data["totals"]["buy"]
