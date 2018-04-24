@@ -1,5 +1,29 @@
-<h1>{{ contract.evepraisalURL }}</h1>
-
-<p>    * Total shipment size: {{ contract.totalSize }}</p>
-<p>    * Collateral: {{ contract.collateral }}</p>
-<p>    * Reward: {{ contract.reward }}</p>
+<html>
+    <head>
+        <title>UST Pricing</title>
+        <style media="screen" type="text/css">
+            body {
+                background: #061321
+            }
+            li {
+                color: #d8ae7d
+            }
+            ul {
+                display: table;
+                margin: 0 auto
+            }
+        </style>
+    </head>
+    <body>
+        <div id="form" align="center">
+            {% load static %}
+            <img src="{% static "USTPricing/DEFIC.png" %}"/>
+            <ul>
+                <li>Total shipment size: {{ contract.totalSize }}</li>
+                <li>Collateral: {{ contract.collateral }}</li>
+                <li>Reward: {{ contract.reward }}</li>
+                <li>Evepraisal URL: {{ contract.evepraisalURL }}</li>
+            </ul>
+        </div>
+    </body>
+</html>

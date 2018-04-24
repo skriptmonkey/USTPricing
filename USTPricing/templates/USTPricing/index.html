@@ -1,11 +1,25 @@
 <html>
-</html>
+    <head>
+        <title> UST Pricing</title>
+        <style media="screen" type="text/css">
+            body {
+                background: #061321
+            }
+            p {
+                color: #D8ae7d
+            }
+        </style>
+    </head>
 <body>
     <div id="form" align="center">
+        {% load static %}
+        <img src="{% static "USTPricing/DEFIC.png" %}"/>
         <p>Enter Evepraisal URL.</p>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Submit" />
         </form>
+    </div>
 </body>
+</html>
