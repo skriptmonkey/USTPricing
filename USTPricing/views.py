@@ -10,10 +10,12 @@ def index(request):
 
         if form.is_valid():
             if USTContract.objects.filter(evepraisalURL=request.POST['evepraisalURL']).exists():
+                print("exists")
                 d = USTContract.objects.get(evepraisalURL=request.POST['evepraisalURL'])
                 return redirect('results', evepraisalID=d.evepraisalID)
             else:
-                form.save()
+                print("doesn't exist")
+#                form.save()
 
                 c = USTContract(evepraisalURL=form.cleaned_data['evepraisalURL'])
                 c.getData()
