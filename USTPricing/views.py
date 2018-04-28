@@ -7,6 +7,7 @@ from .forms import ContractForm
 def index(request):
     if request.method == "POST":
         form = ContractForm(request.POST)
+        print(form)
 
         if form.is_valid():
             if USTContract.objects.filter(evepraisalURL=request.POST['evepraisalURL']).exists():
@@ -17,7 +18,7 @@ def index(request):
                 print("doesn't exist")
 #                form.save()
 
-                c = USTContract(evepraisalURL=form.cleaned_data['evepraisalURL'])
+                c = USTContract(evepraisalURL=form.cleaned_data['evepraisalURL'], rush=form.cleaned_data['rush'])
                 c.getData()
                 c.save()
 

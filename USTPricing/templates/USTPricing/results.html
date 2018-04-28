@@ -17,11 +17,12 @@
     <body>
         <div id="form" align="center">
             {% load static %}
+            {% load humanize %}
             <img src="{% static "USTPricing/DEFIC.png" %}"/>
             <ul>
-                <li>Total shipment size: {{ contract.totalSize }}</li>
-                <li>Collateral: {{ contract.collateral }}</li>
-                <li>Reward: {{ contract.reward }}</li>
+                <li>Total shipment size: {{ contract.totalSize|floatformat:2|intcomma }}</li>
+                <li>Collateral: {{ contract.collateral|floatformat:2|intcomma }}</li>
+                <li>Reward: {{ contract.reward|floatformat:2|intcomma }}</li>
                 <li>Evepraisal URL: {{ contract.evepraisalURL }}</li>
             </ul>
         </div>
