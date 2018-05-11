@@ -22,17 +22,17 @@ class USTContract(models.Model):
 
         if self.rush == 0:
             if self.collateral > 100000000:
-                self.reward = (self.totalSize * 750) + (self.collateral * 0.05)
+                self.reward = (self.totalSize * 800) + (self.collateral * 0.05)
             else:
-                self.reward = (self.totalSize * 750)
+                self.reward = (self.totalSize * 800)
 
-            if self.reward < 10000000:
-                self.reward = 10000000
+            if self.reward < 15000000:
+                self.reward = 15000000
 
             if self.totalSize <= 100 and self.collateral < 100000000:
                 self.reward = 0
         else:
-            self.reward = 200000000 + (self.collateral * 0.05)
+            self.reward = 550000000 + (self.collateral * 0.05)
         
     def __str__(self):
         return self.evepraisalURL
