@@ -21,16 +21,16 @@ class USTContract(models.Model):
         self.collateral= data["totals"]["buy"]
 
         if self.rush == 0:
-            if self.collateral > 100000000:
-                self.reward = (self.totalSize * 800) + (self.collateral * 0.05)
-            else:
-                self.reward = (self.totalSize * 800)
-
-            if self.reward < 15000000:
-                self.reward = 15000000 + (self.collateral * 0.05)
-
             if self.totalSize <= 100 and self.collateral < 100000000:
                 self.reward = 0
+            else:
+                if self.collateral > 100000000:
+                    self.reward = (self.totalSize * 800) + (self.collateral * 0.05)
+                else:
+                    self.reward = (self.totalSize * 800)
+
+                if self.reward < 15000000:
+                    self.reward = 15000000 + (self.collateral * 0.05)
         else:
             self.reward = 550000000 + (self.collateral * 0.05)
         
