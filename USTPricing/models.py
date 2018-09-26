@@ -9,7 +9,7 @@ class USTContract(models.Model):
     collateral = models.FloatField(default=0)
     reward = models.FloatField(default=0)
     evepraisalID = models.CharField(max_length=6)
-    rush = models.BooleanField()
+    rush = models.BooleanField(default=False)
 
     def getData(self):
         url = self.evepraisalURL + ".json"
