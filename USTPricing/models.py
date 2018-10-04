@@ -10,6 +10,9 @@ class USTContract(models.Model):
     reward = models.FloatField(default=0)
     evepraisalID = models.CharField(max_length=6)
     rush = models.BooleanField(default=False)
+    altloc = models.BooleanField(default=False)
+    contractExpiration = models.IntegerField(default=0)
+    deliveryTime = models.IntegerField(default=0)
 
     def getData(self):
         url = self.evepraisalURL + ".json"
@@ -20,19 +23,56 @@ class USTContract(models.Model):
         self.totalSize = data["totals"]["volume"]
         self.collateral= data["totals"]["buy"]
 
-        if self.rush == 0:
+        iskperm3 = 700
+        altiskperm3 = 1100
+
+        print(self.rush)
+        print(self.altloc)
+
+        if (self.rush == False) and (self.altloc == False):
+            self.contractExpiration = 14
+            self.deliveryTime = 14
+            print("test1")
             if self.totalSize <= 100 and self.collateral < 100000000:
                 self.reward = 0
             else:
                 if self.collateral > 100000000:
-                    self.reward = (self.totalSize * 800) + (self.collateral * 0.05)
+                    self.reward = (self.totalSize * iskperm3) + (self.collateral * 0.05)
                 else:
-                    self.reward = (self.totalSize * 800)
+                    self.reward = (self.totalSize * iskperm3)
 
                 if self.reward < 15000000:
                     self.reward = 15000000 + (self.collateral * 0.05)
-        else:
-            self.reward = 550000000 + (self.collateral * 0.05)
+
+                if self.totalSize >= 100 and self.totalSize < 15000 and self.reward < 5000000:
+                    self.reward = 5000000 + (self.collateral * 0.05)
+        elif (self.rush == False) and (self.altloc == True):
+            self.contractExpiration = 28
+            self.deliveryTime = 28
+            print(self.contractExpiration)
+            print(self.deliveryTime)
+            if self.totalSize <= 100 and self.collateral < 100000000:
+                self.reward = 0
+            else:
+                if self.collateral > 100000000:
+                    self.reward = (self.totalSize * altiskperm3) + (self.collateral * 0.05)
+                else:
+                    self.reward = (self.totalSize * altiskperm3)
+
+                if self.reward < 15000000:
+                    self.reward = 15000000 + (self.collateral * 0.05)
+
+                if self.totalSize >= 100 and self.totalSize < 15000 and self.reward < 5000000:
+                    self.reward = 5000000 + (self.collateral * 0.05)
+
+        elif self.rush == True and self.altloc == False:
+            self.contractExpiration = 14
+            self.deliveryTime = 14
+            self.reward = 600000000 + (self.collateral * 0.05)
+        elif self.rush == True and self.altloc == True:
+            self.contractExpiration = 28
+            self.deliveryTime = 28
+            self.reward = 750000000 + (self.collateral * 0.05)
         
     def __str__(self):
         return self.evepraisalURL
