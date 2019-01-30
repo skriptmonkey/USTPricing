@@ -23,8 +23,8 @@ class USTContract(models.Model):
         self.totalSize = data["totals"]["volume"]
         self.collateral= data["totals"]["buy"]
 
-        iskperm3 = 700
-        altiskperm3 = 1100
+        iskperm3 = 500
+        altiskperm3 = 1000
 
         print(self.rush)
         print(self.altloc)
