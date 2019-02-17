@@ -18,5 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('ustpricing/', include('USTPricing.urls')),
+    path('USTPricing/', include('USTPricing.urls')),
     path('admin/', admin.site.urls),
 ]
