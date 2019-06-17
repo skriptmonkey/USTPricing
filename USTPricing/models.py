@@ -34,7 +34,7 @@ class USTContract(models.Model):
             self.contractExpiration = 14
             self.deliveryTime = 14
 
-            if self.totalSize <= 100 and self.collateral < 100000000:
+            if self.totalSize <= 500 and self.collateral < 100000000:
                 self.reward = 0
             else:
                 if self.collateral > 100000000:
