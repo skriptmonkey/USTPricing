@@ -26,27 +26,33 @@ class USTContract(models.Model):
 
         iskperm3 = 500
         altiskperm3 = 1000
+        collateralPercent = 0.05
 
         print(self.rush)
         print(self.altloc)
 
+        # if Not a rush job or an alternative location.
         if (self.rush is False) and (self.altloc is False):
             self.contractExpiration = 14
             self.deliveryTime = 14
-
-            if self.totalSize <= 500 and self.collateral < 100000000:
-                self.reward = 0
+            
+            # if collateral is less than 100M it's free. Otherwise it's 5% of Jita buy value.
+            if self.collateral < 100000000:
+                collateralReward = 0
             else:
-                if self.collateral > 100000000:
-                    self.reward = (self.totalSize * iskperm3) + (self.collateral * 0.05)
+                collateralReward = self.collateral * collateralPercent
+
+            if self.totalSize >= 500:
+                if 500 < self.totalSize < 19999:
+                    self.reward = 10000000
                 else:
-                    self.reward = (self.totalSize * iskperm3)
+                    self.reward = self.totalSize * iskperm3
+            else:
+                self.reward = 0
 
-                if self.reward < 15000000:
-                    self.reward = 15000000 + (self.collateral * 0.05)
+            self.reward += collateralReward
+            
 
-                if 100 <= self.totalSize < 15000 and self.reward < 5000000:
-                    self.reward = 5000000 + (self.collateral * 0.05)
         elif (self.rush is False) and (self.altloc is True):
             self.contractExpiration = 28
             self.deliveryTime = 28
